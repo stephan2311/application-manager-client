@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { Box, Button, FormControl, FormLabel, FormErrorMessage, FormHelperText, ButtonGroup, Input, Radio, RadioGroup, Select, Stack } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormLabel, FormErrorMessage, FormHelperText, ButtonGroup, Input, Radio, RadioGroup, Select, Stack, Heading } from '@chakra-ui/react'
 
 function AddApplication(props) {
     const [position, setPosition] = useState("");
@@ -8,8 +8,6 @@ function AddApplication(props) {
     const [job_post_url, setJobPostUrl] = useState("");
     const [channel, setChannel] = useState("");
     const [status, setStatus] = useState("");
-
-    const API_URL = "http://localhost:5005/api";
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,7 +18,7 @@ function AddApplication(props) {
 
         axios
             .post(
-                `${API_URL}/applications`,
+                `${process.env.REACT_APP_API_URL}/applications`,
                 requestBody,
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
@@ -37,7 +35,7 @@ function AddApplication(props) {
 
     return (
         <Box margin={10}>
-            <h3>Add Application</h3>
+            <Heading>Add Application</Heading>
 
             <form onSubmit={handleSubmit}>
                 <FormLabel htmlFor="position">Position:</FormLabel>

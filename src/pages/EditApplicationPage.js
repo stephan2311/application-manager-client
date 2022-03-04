@@ -14,12 +14,10 @@ function EditApplicationPage(props) {
     const { applicationId } = useParams();
     const navigate = useNavigate();
 
-    const API_URL = "http://localhost:5005/api";
-
     useEffect(() => {
         const storedToken = localStorage.getItem("authToken");
         axios
-            .get(`${API_URL}/applications/${applicationId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .get(`${process.env.REACT_APP_API_URL}/applications/${applicationId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
                 const oneApplication = response.data;
                 setPosition(oneApplication.position);
@@ -40,7 +38,7 @@ function EditApplicationPage(props) {
         const storedToken = localStorage.getItem("authToken");
 
         axios
-            .put(`${API_URL}/applications/${applicationId}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .put(`${process.env.REACT_APP_API_URL}/applications/${applicationId}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
                 navigate(`/applications/${applicationId}`)
             });
@@ -52,7 +50,7 @@ function EditApplicationPage(props) {
         const storedToken = localStorage.getItem("authToken");
 
         axios
-            .delete(`${API_URL}/applications/${applicationId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .delete(`${process.env.REACT_APP_API_URL}/applications/${applicationId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(() => {
                 navigate("/applications");
             })

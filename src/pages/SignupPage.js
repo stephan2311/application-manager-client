@@ -36,7 +36,7 @@ export default function SignupPage(props) {
     const handleSignupSubmit = (e) => {
         e.preventDefault();
         const requestBody = { username, password, email };
-        axios.post(`${process.env.REACT_APP_API_URL}/api/auth/signup`, requestBody)
+        axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, requestBody)
             .then((response) => {
                 navigate('/login');
             })

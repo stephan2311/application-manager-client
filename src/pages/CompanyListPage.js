@@ -1,24 +1,24 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import ApplicationCard from "../components/ApplicationCard";
+import CompanyCard from "../components/CompanyCard";
 
 
-function ApplicationListPage() {
-    const [applications, setApplications] = useState([]);
+function CompanyListPage() {
+    const [companies, setCompanies] = useState([]);
 
-    const getAllApplications = () => {
+    const getAllCompanies = () => {
         const storedToken = localStorage.getItem("authToken");
         axios
             .get(
-                `${process.env.REACT_APP_API_URL}/applications`,
+                `${process.env.REACT_APP_API_URL}/companies`,
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
-            .then((response) => setApplications(response.data))
+            .then((response) => setCompanies(response.data))
             .catch((error) => console.log(error));
     };
 
     useEffect(() => {
-        getAllApplications();
+        getAllCompanies();
     }, []);
 
 
@@ -26,12 +26,12 @@ function ApplicationListPage() {
         <div>
             <div>
                 <div>
-                    <h1>Applications</h1>
-                    {applications.map((application) => {
-                        console.table(application)
+                    <h1>Companies</h1>
+                    {companies.map((company) => {
+                        console.table(company)
                         return (
                             <div>
-                                <ApplicationCard key={application._id} {...application} />
+                                <CompanyCard key={company._id} {...company} />
                             </div>
                         )
                     }
@@ -43,4 +43,4 @@ function ApplicationListPage() {
     );
 }
 
-export default ApplicationListPage;
+export default CompanyListPage;

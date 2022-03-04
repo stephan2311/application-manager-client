@@ -17,7 +17,9 @@ function Header() {
         {isLoggedIn &&
           <>
             <NavLink to="/applications">Applications</NavLink>
+            <NavLink to="/companies">Companies</NavLink>
             <NavLink to="/applications/create-application">New Application</NavLink>
+            <NavLink to="/companies/create-company">New Company</NavLink>
             <button onClick={logOutUser}>Logout</button>
           </>
         }

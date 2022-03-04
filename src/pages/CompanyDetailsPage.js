@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from 'react-router-dom';
 import axios from "axios";
-import AddApplication from "../components/AddApplication";
-import ApplicationCard from "../components/ApplicationCard";
 
-// const API_URL = "http://localhost:5005/api";
 
-function ApplicationDetailsPage(props) {
+function CompanyDetailsPage(props) {
     const [application, setApplication] = useState(null);
     const { applicationId } = useParams();
 
@@ -59,4 +56,4 @@ function ApplicationDetailsPage(props) {
     );
 }
 
-export default ApplicationDetailsPage;
+export default CompanyDetailsPage;

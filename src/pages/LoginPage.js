@@ -37,7 +37,7 @@ export default function LoginPage(props) {
         e.preventDefault();
         const requestBody = { username, password };
 
-        axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, requestBody)
+        axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, requestBody)
             .then((response) => {
                 console.log('JWT token', response.data.authToken);
                 storeToken(response.data.authToken);
