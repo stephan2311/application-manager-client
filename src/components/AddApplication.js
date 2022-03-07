@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Box, Button, FormControl, FormLabel, FormErrorMessage, FormHelperText, ButtonGroup, Input, Radio, RadioGroup, Select, Stack, Heading } from '@chakra-ui/react';
+import { AuthContext } from "../context/auth.context";
 
 function AddApplication() {
     const [position, setPosition] = useState("");
@@ -46,7 +47,7 @@ function AddApplication() {
                 setJobPostUrl("");
                 setChannel("");
                 setStatus("");
-                setCompany("")
+                setCompany("");
             })
             .catch((error) => console.log(error));
 

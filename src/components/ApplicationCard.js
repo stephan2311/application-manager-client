@@ -11,12 +11,12 @@ function ApplicationCard({ position, dateApplied, company, _id }) {
                     {moment(dateApplied).fromNow()}
                 </Box>
                 <Heading size='md' my='2'>
-                    <LinkOverlay href={_id}>
+                    <LinkOverlay href={`/account/applications/${_id}`}>
                         {position}
                     </LinkOverlay>
                 </Heading>
                 <Box as='a' color='teal.400' fontWeight='bold'>
-                    {company}
+                    {company.name}
                 </Box>
             </LinkBox>
         </div>
