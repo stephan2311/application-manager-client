@@ -42,7 +42,7 @@ export default function LoginPage(props) {
                 console.log('JWT token', response.data.authToken);
                 storeToken(response.data.authToken);
                 authenticateUser();
-                navigate('/projects');
+                navigate('/account');
             })
             .catch((error) => {
                 const msg = error.response.data.errorMessage;

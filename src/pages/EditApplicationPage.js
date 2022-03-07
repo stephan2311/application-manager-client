@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
-import { Box, Button, ButtonGroup, FormLabel, Heading, Input, Radio, RadioGroup, Stack } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, FormLabel, Heading, Input, Radio, RadioGroup, Stack, useToast } from '@chakra-ui/react'
+import { useToastHook } from "../components/Toast";
 import axios from "axios";
-
 
 function EditApplicationPage(props) {
     const [position, setPosition] = useState("");
@@ -14,10 +14,22 @@ function EditApplicationPage(props) {
     const { applicationId } = useParams();
     const navigate = useNavigate();
 
+    const toast = useToast();
+
+    const handleDeleteToast = () => {
+        toast({
+            title: "Application deleted.",
+            description: "",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+        });
+    };
+
     useEffect(() => {
         const storedToken = localStorage.getItem("authToken");
         axios
-            .get(`${process.env.REACT_APP_API_URL}/applications/${applicationId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .get(`${process.env.REACT_APP_API_URL}/account/applications/${applicationId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
                 const oneApplication = response.data;
                 setPosition(oneApplication.position);
@@ -38,9 +50,9 @@ function EditApplicationPage(props) {
         const storedToken = localStorage.getItem("authToken");
 
         axios
-            .put(`${process.env.REACT_APP_API_URL}/applications/${applicationId}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .put(`${process.env.REACT_APP_API_URL}/account/applications/${applicationId}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
-                navigate(`/applications/${applicationId}`)
+                navigate(`/account/applications/${applicationId}`);
             });
     };
 
@@ -50,9 +62,10 @@ function EditApplicationPage(props) {
         const storedToken = localStorage.getItem("authToken");
 
         axios
-            .delete(`${process.env.REACT_APP_API_URL}/applications/${applicationId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .delete(`${process.env.REACT_APP_API_URL}/account/applications/${applicationId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(() => {
-                navigate("/applications");
+                navigate("/account/applications");
+                handleDeleteToast();
             })
             .catch((err) => console.log(err));
     };
@@ -121,10 +134,10 @@ function EditApplicationPage(props) {
                     </Stack>
                 </RadioGroup>
 
-                <Button m={3} type="submit">Update Project</Button>
+                <Button m={3} type="submit">Update Application</Button>
             </form>
 
-            <Button m={3} onClick={deleteProject}>Delete Project</Button>
+            <Button m={3} onClick={deleteProject}>Delete Application</Button>
         </Box>
     );
 }

@@ -1,24 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { Box, Button, FormControl, FormLabel, FormErrorMessage, FormHelperText, ButtonGroup, Input, Radio, RadioGroup, Select, Stack, Heading } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormLabel, FormErrorMessage, FormHelperText, ButtonGroup, Input, Radio, RadioGroup, Select, Stack, Heading } from '@chakra-ui/react';
 
-function AddApplication(props) {
+function AddApplication() {
     const [position, setPosition] = useState("");
     const [dateApplied, setDateApplied] = useState("");
     const [job_post_url, setJobPostUrl] = useState("");
     const [channel, setChannel] = useState("");
     const [status, setStatus] = useState("");
+    const [companies, setCompanies] = useState([]);
+    const [company, setCompany] = useState("");
+
+    const getAllCompanies = () => {
+        const storedToken = localStorage.getItem("authToken");
+        axios
+            .get(
+                `${process.env.REACT_APP_API_URL}/companies`,
+                { headers: { Authorization: `Bearer ${storedToken}` } }
+            )
+            .then((response) => setCompanies(response.data))
+            .catch((error) => console.log(error));
+    };
+
+    useEffect(() => {
+        getAllCompanies();
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const requestBody = { position, dateApplied, job_post_url, channel, status };
+        const requestBody = { position, dateApplied, job_post_url, channel, status, company };
+        console.log(requestBody)
 
         const storedToken = localStorage.getItem('authToken');
 
         axios
             .post(
-                `${process.env.REACT_APP_API_URL}/applications`,
+                `${process.env.REACT_APP_API_URL}/account/applications`,
                 requestBody,
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
@@ -28,10 +46,11 @@ function AddApplication(props) {
                 setJobPostUrl("");
                 setChannel("");
                 setStatus("");
+                setCompany("")
             })
             .catch((error) => console.log(error));
-    };
 
+    };
 
     return (
         <Box margin={10}>
@@ -62,6 +81,13 @@ function AddApplication(props) {
                     value={job_post_url}
                     onChange={(e) => setJobPostUrl(e.target.value)}
                 />
+
+                <FormLabel htmlFor="companies">Company:</FormLabel>
+                <Select name="companies" onChange={(e) => setCompany(e.target.value)}>
+                    {companies.map(item => {
+                        return (<option key={item._id} value={item._id}>{item.name}</option>);
+                    })}
+                </Select>
 
                 <RadioGroup onChange={setChannel} value={channel}>
                     <Stack direction='row'>

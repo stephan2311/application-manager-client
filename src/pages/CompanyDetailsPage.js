@@ -4,52 +4,52 @@ import axios from "axios";
 
 
 function CompanyDetailsPage(props) {
-    const [application, setApplication] = useState(null);
-    const { applicationId } = useParams();
+    const [company, setCompany] = useState(null);
+    const { companyId } = useParams();
 
     console.log(process.env.REACT_APP_API_URL);
 
-    const getApplication = () => {
+    const getCompany = () => {
         const storedToken = localStorage.getItem("authToken");
         axios
             .get(
-                `${process.env.REACT_APP_API_URL}/applications/${applicationId}`,
+                `${process.env.REACT_APP_API_URL}/companies/${companyId}`,
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
             .then((response) => {
-                const oneApplication = response.data;
-                setApplication(oneApplication);
+                const oneCompany = response.data;
+                setCompany(oneCompany);
             })
             .catch((error) => console.log(error));
     };
 
 
     useEffect(() => {
-        getApplication();
+        getCompany();
     }, []);
 
 
     return (
         <div>
 
-            {application && (
+            {company && (
                 <>
-                    <h1>{application.position}</h1>
-                    <p>{application.dateApplied}</p>
-                    <p>{application.website}</p>
-                    <p>{application.status}</p>
-                    <p>{application.company}</p>
+                    <h1>{company.position}</h1>
+                    <p>{company.dateApplied}</p>
+                    <p>{company.website}</p>
+                    <p>{company.status}</p>
+                    <p>{company.company}</p>
                 </>
             )}
 
             {/* {application && application.tasks.map((task) => <ApplicationCard key={application._id} {...application} />)} */}
 
-            <Link to="/applications">
+            <Link to="/companies">
                 <button>Back to List</button>
             </Link>
 
-            <Link to={`/applications/edit/${applicationId}`}>
-                <button>Edit Application</button>
+            <Link to={`/companies/edit/${companyId}`}>
+                <button>Edit Company</button>
             </Link>
 
         </div>

@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import theme from './theme'
 import reportWebVitals from './reportWebVitals';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProviderWrapper } from './context/auth.context';
@@ -12,11 +13,12 @@ import { AuthProviderWrapper } from './context/auth.context';
 ReactDOM.render(
   <ChakraProvider>
     <Router>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <AuthProviderWrapper>
         <App />
       </AuthProviderWrapper>
     </Router>
-  </ChakraProvider>,
+  </ChakraProvider >,
   document.getElementById('root')
 );
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import CompanyCard from "../components/CompanyCard";
+import { Heading } from "@chakra-ui/react";
 
 
 function CompanyListPage() {
@@ -26,7 +27,7 @@ function CompanyListPage() {
         <div>
             <div>
                 <div>
-                    <h1>Companies</h1>
+                    <Heading>Companies</Heading>
                     {companies.map((company) => {
                         console.table(company)
                         return (
