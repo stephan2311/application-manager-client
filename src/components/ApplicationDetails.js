@@ -8,8 +8,6 @@ function ApplicationDetails(props) {
     const { applicationId } = useParams();
     const [application, setApplication] = useState(null);
 
-    console.log(process.env.REACT_APP_API_URL);
-
     const getApplication = () => {
         const storedToken = localStorage.getItem("authToken");
         axios

@@ -14,8 +14,9 @@ import AddCompany from './pages/AddCompany';
 import CompanyListPage from './pages/CompanyListPage';
 import Footer from './components/Footer';
 import CompanyDetailsPage from './pages/CompanyDetailsPage';
-import Account from './pages/Account';
+import Account from './pages/HomePage';
 import ApplicationsView from './pages/ApplicationsView';
+import HomePage from './pages/HomePage';
 
 
 // function ApplicationView() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="" element={<IsPrivate><ApplicationListPage /></IsPrivate>} />
           <Route path=":applicationId" element={<IsPrivate><ApplicationDetailsPage /></IsPrivate>} />
         </Route>
+        <Route path="/" element={<IsAnon><HomePage /></IsAnon>} />
         <Route path="/companies" element={<IsPrivate><CompanyListPage /></IsPrivate>} />
         <Route path="/companies/:companyId" element={<IsPrivate><CompanyDetailsPage /></IsPrivate>} />
         <Route path="/account/applications/edit/:applicationId" element={<IsPrivate><EditApplicationPage /></IsPrivate>} />
