@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ApplicationCard from "./ApplicationCard";
-import { Box, GridItem } from "@chakra-ui/react";
+import { Box, Button, GridItem, Model, useDisclosure } from "@chakra-ui/react";
 import ApplicationDetails from "./ApplicationDetails";
 
 
@@ -22,7 +22,6 @@ function ApplicationList() {
     useEffect(() => {
         getAllApplications();
     }, []);
-
 
     return (
         <Box>

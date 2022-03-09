@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Box, Button, FormControl, FormLabel, FormErrorMessage, FormHelperText, ButtonGroup, Input, Radio, RadioGroup, Select, Stack, Heading } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, FormErrorMessage, FormHelperText, ButtonGroup, Input, Radio, RadioGroup, Select, Stack, Heading, Textarea } from '@chakra-ui/react';
 import { AuthContext } from "../context/auth.context";
 
 function AddApplication() {
@@ -11,6 +11,8 @@ function AddApplication() {
     const [status, setStatus] = useState("");
     const [companies, setCompanies] = useState([]);
     const [company, setCompany] = useState("");
+    const [contacts, setContacts] = useState([]);
+    const [comment, setComment] = useState("");
 
     const getAllCompanies = () => {
         const storedToken = localStorage.getItem("authToken");
@@ -27,11 +29,16 @@ function AddApplication() {
         getAllCompanies();
     }, []);
 
+    const handleContactInput = (e) => {
+        const newContact = { ...contacts };
+        newContact[e.target.name] = e.target.value;
+        setContacts(newContact);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const requestBody = { position, dateApplied, job_post_url, channel, status, company };
-        console.log(requestBody)
+        const requestBody = { position, dateApplied, job_post_url, channel, status, company, contacts, comment };
 
         const storedToken = localStorage.getItem('authToken');
 
@@ -48,6 +55,8 @@ function AddApplication() {
                 setChannel("");
                 setStatus("");
                 setCompany("");
+                setContacts({ name: "", mail: "", phone: "" });
+                setComment("");
             })
             .catch((error) => console.log(error));
 
@@ -90,6 +99,31 @@ function AddApplication() {
                     })}
                 </Select>
 
+
+                <FormLabel htmlFor="contacts">Contact:</FormLabel>
+                <Input
+                    placeholder="Name"
+                    type="text"
+                    name="name"
+                    value={contacts.name}
+                    onChange={handleContactInput}
+                />
+                <Input
+                    placeholder="E-Mail"
+                    type="email"
+                    name="mail"
+                    value={contacts.mail}
+                    onChange={handleContactInput}
+                />
+                <Input
+                    placeholder="Phone Number"
+                    type="number"
+                    name="phone"
+                    value={contacts.phone}
+                    onChange={handleContactInput}
+                />
+
+
                 <RadioGroup onChange={setChannel} value={channel}>
                     <Stack direction='row'>
                         <label name="channel">Channel:</label>
@@ -121,6 +155,14 @@ function AddApplication() {
                         </Radio>
                     </Stack>
                 </RadioGroup>
+
+                <Textarea
+                    placeholder="Add some comments here"
+                    type="textfield"
+                    name="comments"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                />
 
                 <Button type="submit">Submit</Button>
             </form>

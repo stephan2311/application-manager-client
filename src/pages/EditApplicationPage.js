@@ -10,6 +10,9 @@ function EditApplicationPage(props) {
     const [job_post_url, setJobPostUrl] = useState("");
     const [channel, setChannel] = useState("");
     const [status, setStatus] = useState("");
+    const [company, setCompany] = useState("");
+    const [contacts, setContacts] = useState([]);
+    const [comment, setComment] = useState("");
 
     const { applicationId } = useParams();
     const navigate = useNavigate();
@@ -42,22 +45,36 @@ function EditApplicationPage(props) {
 
     }, [applicationId]);
 
+    const handleContactInput = (e) => {
+        const newContact = { ...contacts };
+        newContact[e.target.name] = e.target.value;
+        setContacts(newContact);
+    };
+
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const requestBody = { position, dateApplied, job_post_url, channel, status };
+        const requestBody = { position, dateApplied, job_post_url, channel, status, company, contacts, comment };
 
         const storedToken = localStorage.getItem("authToken");
 
         axios
             .put(`${process.env.REACT_APP_API_URL}/account/applications/${applicationId}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
+                setPosition("");
+                setDateApplied("");
+                setJobPostUrl("");
+                setChannel("");
+                setStatus("");
+                setContacts({ name: "", mail: "", phone: "" });
+                setComment("");
                 navigate(`/account/applications/${applicationId}`);
-            });
+            })
+            .catch((error) => console.log(error));
     };
 
 
-    const deleteProject = () => {
+    const deleteApplication = () => {
 
         const storedToken = localStorage.getItem("authToken");
 
@@ -101,6 +118,29 @@ function EditApplicationPage(props) {
                     onChange={(e) => setJobPostUrl(e.target.value)}
                 />
 
+                <FormLabel htmlFor="contacts">Contact:</FormLabel>
+                <Input
+                    placeholder="Name"
+                    type="text"
+                    name="name"
+                    value={contacts.name}
+                    onChange={handleContactInput}
+                />
+                <Input
+                    placeholder="E-Mail"
+                    type="email"
+                    name="mail"
+                    value={contacts.mail}
+                    onChange={handleContactInput}
+                />
+                <Input
+                    placeholder="Phone Number"
+                    type="number"
+                    name="phone"
+                    value={contacts.phone}
+                    onChange={handleContactInput}
+                />
+
                 <RadioGroup mt={3} onChange={setChannel} value={channel}>
                     <Stack direction='row'>
                         <FormLabel name="channel">Channel:</FormLabel>
@@ -137,7 +177,7 @@ function EditApplicationPage(props) {
                 <Button m={3} type="submit">Update Application</Button>
             </form>
 
-            <Button m={3} onClick={deleteProject}>Delete Application</Button>
+            <Button m={3} onClick={deleteApplication}>Delete Application</Button>
         </Box>
     );
 }
