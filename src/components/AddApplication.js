@@ -12,7 +12,7 @@ function AddApplication() {
     const [status, setStatus] = useState("");
     const [companies, setCompanies] = useState([]);
     const [company, setCompany] = useState("");
-    const [contacts, setContacts] = useState([]);
+    const [contact, setContact] = useState([]);
     const [comment, setComment] = useState("");
 
     const navigate = useNavigate();
@@ -33,15 +33,15 @@ function AddApplication() {
     }, []);
 
     const handleContactInput = (e) => {
-        const newContact = { ...contacts };
+        const newContact = { ...contact };
         newContact[e.target.name] = e.target.value;
-        setContacts(newContact);
+        setContact(newContact);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const requestBody = { position, dateApplied, job_post_url, channel, status, company, contacts, comment };
+        const requestBody = { position, dateApplied, job_post_url, channel, status, company, contact, comment };
 
         const storedToken = localStorage.getItem('authToken');
 
@@ -58,7 +58,7 @@ function AddApplication() {
                 setChannel("");
                 setStatus("");
                 setCompany("");
-                setContacts({ name: "", mail: "", phone: "" });
+                setContact({ name: "", mail: "", phone: "" });
                 setComment("");
                 navigate("/account/applications")
             })
@@ -109,26 +109,26 @@ function AddApplication() {
                     onChange={(e) => setJobPostUrl(e.target.value)}
                 />
 
-                <FormLabel mt={2} htmlFor="contacts">Contact:</FormLabel>
+                <FormLabel mt={2} htmlFor="contact">Contact:</FormLabel>
                 <Input
                     placeholder="Name"
                     type="text"
                     name="name"
-                    value={contacts.name}
+                    value={contact.name}
                     onChange={handleContactInput}
                 />
                 <Input mt={1}
                     placeholder="E-Mail"
                     type="email"
                     name="mail"
-                    value={contacts.mail}
+                    value={contact.mail}
                     onChange={handleContactInput}
                 />
                 <Input mt={1}
                     placeholder="Phone Number"
                     type="number"
                     name="phone"
-                    value={contacts.phone}
+                    value={contact.phone}
                     onChange={handleContactInput}
                 />
 

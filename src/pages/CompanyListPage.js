@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import CompanyCard from "../components/CompanyCard";
-import { Heading } from "@chakra-ui/react";
+import { Box, Container, Heading } from "@chakra-ui/react";
 
 
 function CompanyListPage() {
@@ -25,20 +25,18 @@ function CompanyListPage() {
 
     return (
         <div>
-            <div>
-                <div>
-                    <Heading>Companies</Heading>
-                    {companies.map((company) => {
-                        console.table(company)
-                        return (
-                            <div>
-                                <CompanyCard key={company._id} {...company} />
-                            </div>
-                        )
-                    }
-                    )}
-                </div>
-            </div>
+            <Container mt={10}>
+                <Heading align={'center'} m={20}>Companies</Heading>
+                {companies.map((company) => {
+                    console.table(company)
+                    return (
+                        <Box m={2}>
+                            <CompanyCard key={company._id} {...company} />
+                        </Box>
+                    )
+                }
+                )}
+            </Container>
         </div >
 
     );

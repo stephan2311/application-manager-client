@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from 'react-router-dom';
 import axios from "axios";
+import { Heading } from "@chakra-ui/react";
+import { LinkIcon } from "@chakra-ui/icons";
 
 
 function CompanyDetailsPage(props) {
@@ -34,11 +36,8 @@ function CompanyDetailsPage(props) {
 
             {company && (
                 <>
-                    <h1>{company.position}</h1>
-                    <p>{company.dateApplied}</p>
-                    <p>{company.website}</p>
-                    <p>{company.status}</p>
-                    <p>{company.company}</p>
+                    <Heading>{company.name}</Heading>
+                    <LinkIcon>{company.website}</LinkIcon>
                 </>
             )}
 

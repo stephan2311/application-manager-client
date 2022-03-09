@@ -17,7 +17,7 @@ import {
   Switch,
   Stack,
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon, AddIcon, SunIcon, MoonIcon } from '@chakra-ui/icons';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
@@ -32,7 +32,11 @@ function Header() {
 
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+      <Box 
+      bg={useColorModeValue('gray.100', 'gray.900')} 
+      px={4} 
+      sx={{ position: '-webkit-sticky', /* Safari */ position: 'sticky', top: '0', }}
+      zIndex={200}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
@@ -55,7 +59,7 @@ function Header() {
                   <NavLink to="/companies">Companies</NavLink>
                   <NavLink to="/companies/create-company">New Company</NavLink>
                   <Button onClick={toggleColorMode}>
-                    {colorMode === 'light' ? '🌙' : '🔆'}
+                    {colorMode === 'light' ? <MoonIcon/> : <SunIcon/>}
                   </Button>
                   <button onClick={logOutUser}>Logout</button>
                 </>

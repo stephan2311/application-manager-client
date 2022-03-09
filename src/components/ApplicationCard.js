@@ -6,13 +6,13 @@ import axios from "axios";
 import { CalendarIcon, ChatIcon, EmailIcon, LinkIcon } from '@chakra-ui/icons';
 import ApplicationDetails from "./ApplicationDetails";
 
-function ApplicationCard({ position, dateApplied, company, status, website, channel, contacts, comment, _id }) {
+function ApplicationCard({ position, dateApplied, company, status, website, channel, contact, comment, _id }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
         <>
-            <Box as='article' maxW='sm' p='5' borderWidth='1px' rounded='md'>
+            <Box as='article' maxW='md' p='5' borderWidth='1px' rounded='md'>
                 <Flex>
                     <Box as='time'>
                         {moment(dateApplied).fromNow()}
@@ -79,7 +79,7 @@ function ApplicationCard({ position, dateApplied, company, status, website, chan
                                                 </ListItem>
                                                 <ListItem>
                                                     <ListIcon as={EmailIcon} color="green.400" />
-                                                    {contacts.mail}
+                                                    {contact.mail}
                                                 </ListItem>
                                                 <ListItem>
                                                     <ListIcon as={LinkIcon} color="green.400" />

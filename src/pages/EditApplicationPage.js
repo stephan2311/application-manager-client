@@ -11,16 +11,16 @@ function EditApplicationPage(props) {
     const [channel, setChannel] = useState("");
     const [status, setStatus] = useState("");
     const [company, setCompany] = useState("");
-    const [contacts, setContacts] = useState({name: "", mail: "", phone: ""});
+    const [contact, setContact] = useState({name: "", mail: "", phone: ""});
     const [comment, setComment] = useState("");
 
     const { applicationId } = useParams();
     const navigate = useNavigate();
     
     const handleContactInput = (e) => {
-        const newContact = { ...contacts };
+        const newContact = { ...contact };
         newContact[e.target.name] = e.target.value;
-        setContacts(newContact);
+        setContact(newContact);
     };
 
     const toast = useToast();
@@ -40,13 +40,14 @@ function EditApplicationPage(props) {
         axios
             .get(`${process.env.REACT_APP_API_URL}/account/applications/${applicationId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
+                console.log(response);
                 const oneApplication = response.data;
                 setPosition(oneApplication.position);
                 setDateApplied(oneApplication.dateApplied);
                 setJobPostUrl(oneApplication.job_post_url);
                 setChannel(oneApplication.channel);
                 setStatus(oneApplication.status);
-                setContacts({ name: oneApplication.contacts.name, city: oneApplication.address.mail, zip: oneApplication.address.phone });
+                setContact({ name: oneApplication.contact.name, mail: oneApplication.contact.mail, phone: oneApplication.contact.phone });
                 setComment(oneApplication.comment);
             })
             .catch((error) => console.log(error));
@@ -57,7 +58,7 @@ function EditApplicationPage(props) {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const requestBody = { position, dateApplied, job_post_url, channel, status, company, contacts, comment };
+        const requestBody = { position, dateApplied, job_post_url, channel, status, company, contact, comment };
 
         const storedToken = localStorage.getItem("authToken");
 
@@ -69,7 +70,7 @@ function EditApplicationPage(props) {
                 setJobPostUrl("");
                 setChannel("");
                 setStatus("");
-                setContacts({ name: "", mail: "", phone: "" });
+                setContact({ name: "", mail: "", phone: "" });
                 setComment("");
                 navigate(`/account/applications/${applicationId}`);
             })
@@ -107,7 +108,7 @@ function EditApplicationPage(props) {
 
                 <FormLabel mt={3}>Day applied:</FormLabel>
                 <Input
-                    type="date"
+                    type="text"
                     name="dateApplied"
                     value={dateApplied}
                     onChange={(e) => setDateApplied(e.target.value)}
@@ -121,21 +122,21 @@ function EditApplicationPage(props) {
                     onChange={(e) => setJobPostUrl(e.target.value)}
                 />
 
-                <FormLabel mt={3} htmlFor="contacts">Contact:</FormLabel>
+                <FormLabel mt={3} htmlFor="contact">Contact:</FormLabel>
                 <Input
                     mt={1}
                     placeholder="Name"
                     type="text"
                     name="name"
-                    value={contacts.name}
+                    value={contact.name}
                     onChange={handleContactInput}
                 />
                 <Input
                     mt={1}
                     placeholder="E-Mail"
-                    type="email"
+                    type="mail"
                     name="mail"
-                    value={contacts.mail}
+                    value={contact.mail}
                     onChange={handleContactInput}
                 />
                 <Input
@@ -143,7 +144,7 @@ function EditApplicationPage(props) {
                     placeholder="Phone Number"
                     type="number"
                     name="phone"
-                    value={contacts.phone}
+                    value={contact.phone}
                     onChange={handleContactInput}
                 />
 
