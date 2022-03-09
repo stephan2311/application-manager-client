@@ -16,7 +16,6 @@ function AddCompany(props) {
 
     const navigate = useNavigate();
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -34,18 +33,18 @@ function AddCompany(props) {
                 setName("");
                 setWebsite("");
                 setAddress({ street: "", city: "", zip: "", country: "" });
-                navigate("/companies");
+                navigate(-1);
             })
             .catch((error) => console.log(error));
     };
 
 
     return (
-        <Box margin={10}>
+        <Box m={50}>
             <Heading>Add Company</Heading>
 
             <form onSubmit={handleSubmit}>
-                <FormLabel htmlFor="name">Name:</FormLabel>
+                <FormLabel mt={2} htmlFor="name">Name:</FormLabel>
                 <Input
                     placeholder="Company Name"
                     type="text"
@@ -54,7 +53,7 @@ function AddCompany(props) {
                     onChange={(e) => setName(e.target.value)}
                 />
 
-                <FormLabel htmlFor="website">Website:</FormLabel>
+                <FormLabel mt={2} htmlFor="website">Website:</FormLabel>
                 <Input
                     type="url"
                     id="website"
@@ -62,7 +61,7 @@ function AddCompany(props) {
                     onChange={(e) => setWebsite(e.target.value)}
                 />
 
-                <FormLabel htmlFor="address">Address:</FormLabel>
+                <FormLabel mt={2} htmlFor="address">Address:</FormLabel>
                 <Input
                     placeholder="Street"
                     type="text"
@@ -70,29 +69,30 @@ function AddCompany(props) {
                     value={address.street}
                     onChange={handleAddressInput}
                 />
-                <Input
+                <Input mt={2}
                     placeholder="City"
                     type="text"
                     name="city"
                     value={address.city}
                     onChange={handleAddressInput}
                 />
-                <Input
+                <Input mt={2}
                     placeholder="ZIP Code"
                     type="text"
                     name="zip"
                     value={address.zip}
                     onChange={handleAddressInput}
                 />
-                <Input
+                <Input mt={2}
                     placeholder="Country"
                     type="text"
                     name="country"
                     value={address.country}
                     onChange={handleAddressInput}
                 />
-                <Button type="submit">Submit</Button>
+                <Button mt={2} type="submit">Submit</Button>
             </form>
+            <Button mt={2} onClick={() => navigate(-1)}>Back</Button>
         </Box>
     );
 }

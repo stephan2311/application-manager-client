@@ -26,7 +26,6 @@ function ApplicationList() {
     return (
         <Box>
             {applications.map((application) => {
-                console.table(application)
                 return (
                     <Box m={2}>
                         <ApplicationCard key={application._id} {...application} />

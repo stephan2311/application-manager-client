@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
-import { Box, Button, ButtonGroup, FormLabel, Heading, Input, Radio, RadioGroup, Stack, useToast } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, FormLabel, Heading, Input, Radio, RadioGroup, Stack, Textarea, useToast } from '@chakra-ui/react'
 import { useToastHook } from "../components/Toast";
 import axios from "axios";
 
@@ -11,14 +11,20 @@ function EditApplicationPage(props) {
     const [channel, setChannel] = useState("");
     const [status, setStatus] = useState("");
     const [company, setCompany] = useState("");
-    const [contacts, setContacts] = useState([]);
+    const [contacts, setContacts] = useState({name: "", mail: "", phone: ""});
     const [comment, setComment] = useState("");
 
     const { applicationId } = useParams();
     const navigate = useNavigate();
+    
+    const handleContactInput = (e) => {
+        const newContact = { ...contacts };
+        newContact[e.target.name] = e.target.value;
+        setContacts(newContact);
+    };
 
     const toast = useToast();
-
+    
     const handleDeleteToast = () => {
         toast({
             title: "Application deleted.",
@@ -40,16 +46,13 @@ function EditApplicationPage(props) {
                 setJobPostUrl(oneApplication.job_post_url);
                 setChannel(oneApplication.channel);
                 setStatus(oneApplication.status);
+                setContacts({ name: oneApplication.contacts.name, city: oneApplication.address.mail, zip: oneApplication.address.phone });
+                setComment(oneApplication.comment);
             })
             .catch((error) => console.log(error));
 
     }, [applicationId]);
 
-    const handleContactInput = (e) => {
-        const newContact = { ...contacts };
-        newContact[e.target.name] = e.target.value;
-        setContacts(newContact);
-    };
 
 
     const handleFormSubmit = (e) => {
@@ -89,7 +92,7 @@ function EditApplicationPage(props) {
 
 
     return (
-        <Box m={100}>
+        <Box m={50}>
             <Heading>Edit the Application</Heading>
 
             <form onSubmit={handleFormSubmit}>
@@ -118,8 +121,9 @@ function EditApplicationPage(props) {
                     onChange={(e) => setJobPostUrl(e.target.value)}
                 />
 
-                <FormLabel htmlFor="contacts">Contact:</FormLabel>
+                <FormLabel mt={3} htmlFor="contacts">Contact:</FormLabel>
                 <Input
+                    mt={1}
                     placeholder="Name"
                     type="text"
                     name="name"
@@ -127,6 +131,7 @@ function EditApplicationPage(props) {
                     onChange={handleContactInput}
                 />
                 <Input
+                    mt={1}
                     placeholder="E-Mail"
                     type="email"
                     name="mail"
@@ -134,6 +139,7 @@ function EditApplicationPage(props) {
                     onChange={handleContactInput}
                 />
                 <Input
+                    mt={1}
                     placeholder="Phone Number"
                     type="number"
                     name="phone"
@@ -174,10 +180,17 @@ function EditApplicationPage(props) {
                     </Stack>
                 </RadioGroup>
 
-                <Button m={3} type="submit">Update Application</Button>
+                <Textarea mt={2}
+                    type="textfield"
+                    name="comment"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                />
+
+                <Button mt={3} type="submit">Update Application</Button>
             </form>
 
-            <Button m={3} onClick={deleteApplication}>Delete Application</Button>
+            <Button mt={3} onClick={deleteApplication}>Delete Application</Button>
         </Box>
     );
 }

@@ -17,29 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { CalendarIcon, EmailIcon, LinkIcon } from '@chakra-ui/icons';
 
-export default function ApplicationDetails() {
-
-    const { applicationId } = useParams();
-    const [application, setApplication] = useState(null);
-
-    const getApplication = () => {
-        const storedToken = localStorage.getItem("authToken");
-        axios
-            .get(
-                `${process.env.REACT_APP_API_URL}/account/applications/${applicationId}`,
-                { headers: { Authorization: `Bearer ${storedToken}` } }
-            )
-            .then((response) => {
-                const oneApplication = response.data;
-                setApplication(oneApplication);
-            })
-            .catch((error) => console.log(error));
-    };
-
-
-    useEffect(() => {
-        getApplication();
-    }, []);
+export default function ApplicationDetails(props) {
 
 
     return (
@@ -65,11 +43,11 @@ export default function ApplicationDetails() {
                             px={3}
                             color={'green.500'}
                             rounded={'full'}>
-                            {application && (<>{application.status}</>)}
+                            {props.comment}
                         </Text>
                         <Stack direction={'row'} align={'center'} justify={'center'}>
                             <Text fontSize={'3xl'} fontWeight={800}>
-                                {application && (<>{application.position}</>)}
+                                {props.position}
                             </Text>
                         </Stack>
                     </Stack>
@@ -78,35 +56,33 @@ export default function ApplicationDetails() {
                         <List spacing={3}>
                             <ListItem>
                                 <ListIcon as={CalendarIcon} color="green.400" />
-                                {application && (<>{moment(application.dateApplied).format("LL")}</>)}
+                                {props.dateApplied}
                             </ListItem>
                             <ListItem>
                                 <ListIcon as={EmailIcon} color="green.400" />
-                                {application && (<>{application.contact}</>)}
+                                {props.contacts}
                             </ListItem>
                             <ListItem>
                                 <ListIcon as={LinkIcon} color="green.400" />
-                                {application && (<>{application.website}</>)}
+                                {props.website}
                             </ListItem>
                         </List>
 
                         <LinkBox as={'button'}>
-                            {application &&
-                                <LinkOverlay href={`/account/applications/edit/${application._id}`}>
-                                    <Button
-                                        mt={10}
-                                        w={'full'}
-                                        bg={'green.400'}
-                                        color={'white'}
-                                        rounded={'xl'}
-                                        boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
-                                        _focus={{
-                                            bg: 'green.500',
-                                        }}>
-                                        Edit Application
-                                    </Button>
-                                </LinkOverlay>
-                            }
+                            <LinkOverlay href={`/account/applications/edit/${props._id}`}>
+                                <Button
+                                    mt={10}
+                                    w={'full'}
+                                    bg={'green.400'}
+                                    color={'white'}
+                                    rounded={'xl'}
+                                    boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+                                    _focus={{
+                                        bg: 'green.500',
+                                    }}>
+                                    Edit Application
+                                </Button>
+                            </LinkOverlay>
                         </LinkBox>
 
                     </Box>

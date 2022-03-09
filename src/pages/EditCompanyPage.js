@@ -95,7 +95,7 @@ function EditCompanyPage(props) {
                     onChange={(e) => setWebsite(e.target.value)}
                 />
 
-<FormLabel htmlFor="address">Address:</FormLabel>
+<FormLabel mt={3} htmlFor="address">Address:</FormLabel>
                 <Input
                     placeholder="Street"
                     type="text"
@@ -103,21 +103,21 @@ function EditCompanyPage(props) {
                     value={address.street}
                     onChange={handleAddressInput}
                 />
-                <Input
+                <Input mt={2}
                     placeholder="City"
                     type="text"
                     name="city"
                     value={address.city}
                     onChange={handleAddressInput}
                 />
-                <Input
+                <Input mt={2}
                     placeholder="ZIP Code"
                     type="text"
                     name="zip"
                     value={address.zip}
                     onChange={handleAddressInput}
                 />
-                <Input
+                <Input mt={2}
                     placeholder="Country"
                     type="text"
                     name="country"
@@ -125,10 +125,10 @@ function EditCompanyPage(props) {
                     onChange={handleAddressInput}
                 />
 
-                <Button m={3} type="submit">Update Company</Button>
+                <Button mt={3} type="submit">Update Company</Button>
             </form>
 
-            <Button m={3} onClick={deleteCompany}>Delete Company</Button>
+            <Button mt={3} onClick={deleteCompany}>Delete Company</Button>
         </Box>
     );
 }
