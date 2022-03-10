@@ -72,7 +72,7 @@ function EditApplicationPage(props) {
                 setStatus("");
                 setContact({ name: "", mail: "", phone: "" });
                 setComment("");
-                navigate(`/account/applications/${applicationId}`);
+                navigate(`/account/applications`);
             })
             .catch((error) => console.log(error));
     };
@@ -148,7 +148,7 @@ function EditApplicationPage(props) {
                     onChange={handleContactInput}
                 />
 
-                <RadioGroup mt={3} onChange={setChannel} value={channel}>
+                <RadioGroup mt={4} onChange={setChannel} value={channel}>
                     <Stack direction='row'>
                         <FormLabel name="channel">Channel:</FormLabel>
                         <Radio value='Personal Intro/Recommendation'>Personal Intro/Recommendation</Radio>
@@ -160,7 +160,7 @@ function EditApplicationPage(props) {
                 </RadioGroup>
 
 
-                <RadioGroup mt={3} onChange={setStatus} value={status}>
+                <RadioGroup mt={4} onChange={setStatus} value={status}>
                     <Stack spacing={5} direction='row'>
                         <FormLabel name="status">Status:</FormLabel>
                         <Radio colorScheme='blue' value='submitted'>

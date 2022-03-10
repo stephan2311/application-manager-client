@@ -2,7 +2,7 @@ import './App.css';
 import { Routes, Route, Outlet } from "react-router-dom";
 
 import Header from './components/Header';
-import ApplicationListPage from './components/ApplicationList';
+import ApplicationList from './components/ApplicationList';
 import ApplicationDetailsPage from './components/ApplicationDetails';
 import EditApplicationPage from './pages/EditApplicationPage';
 import SignupPage from './pages/SignupPage';
@@ -15,7 +15,6 @@ import CompanyListPage from './pages/CompanyListPage';
 import Footer from './components/Footer';
 import CompanyDetailsPage from './pages/CompanyDetailsPage';
 import Account from './pages/HomePage';
-import ApplicationsView from './pages/ApplicationsView';
 import HomePage from './pages/HomePage';
 import EditCompanyPage from './pages/EditCompanyPage';
 import JobListPage from './pages/JobListPage';
@@ -37,8 +36,7 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/account/applications" element={<IsPrivate><ApplicationsView /></IsPrivate>} />
-        <Route path="" element={<IsPrivate><ApplicationListPage /></IsPrivate>} />
+        <Route path="/account/applications" element={<IsPrivate><ApplicationList /></IsPrivate>} />
         <Route path=":applicationId" element={<IsPrivate><ApplicationDetailsPage /></IsPrivate>} />
         <Route path="/" element={<IsAnon><HomePage /></IsAnon>} />
         <Route path="/jobs" element={<IsPrivate><JobListPage /></IsPrivate>} />

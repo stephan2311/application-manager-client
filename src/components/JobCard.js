@@ -1,7 +1,7 @@
 import { Box, Button, Center, Flex, Heading, List, ListIcon, ListItem, LinkOverlay, LinkBox, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Spacer, Stack, Text, useColorModeValue, useDisclosure, flexbox, Link } from "@chakra-ui/react";
 import moment from 'moment';
 import axios from "axios";
-import { CalendarIcon, ChatIcon, EmailIcon, LinkIcon } from '@chakra-ui/icons';
+import { CalendarIcon, ChatIcon, EmailIcon, ExternalLinkIcon, LinkIcon } from '@chakra-ui/icons';
 
 function JobCard({ url, title, company_name, company_log, category, job_type, publication_date, candidate_required_location, salary, description, _id }) {
 
@@ -80,7 +80,7 @@ function JobCard({ url, title, company_name, company_log, category, job_type, pu
                                                 </ListItem>
                                                 <ListItem>
                                                     <ListIcon as={LinkIcon} color="green.400" />
-                                                    <Link href={url}>See Job Post</Link>
+                                                    <Link href={url} isExternal>See Job Post<ExternalLinkIcon mx='2px' /></Link>
                                                 </ListItem>
                                                 <ListItem>
                                                     <ListIcon as={ChatIcon} color="green.400" />

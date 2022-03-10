@@ -16,6 +16,7 @@ import {
   useColorModeValue,
   Switch,
   Stack,
+  Image,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, AddIcon, SunIcon, MoonIcon } from '@chakra-ui/icons';
 import React from 'react';
@@ -32,11 +33,11 @@ function Header() {
 
   return (
     <>
-      <Box 
-      bg={useColorModeValue('gray.100', 'gray.900')} 
-      px={4} 
-      sx={{ position: '-webkit-sticky', /* Safari */ position: 'sticky', top: '0', }}
-      zIndex={200}>
+      <Box
+        bg={useColorModeValue('gray.100', 'gray.900')}
+        px={4}
+        sx={{ position: '-webkit-sticky', /* Safari */ position: 'sticky', top: '0', }}
+        zIndex={200}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
@@ -45,7 +46,9 @@ function Header() {
             display={{ md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/">
+            <Image src="https://img.icons8.com/material-rounded/24/000000/home.png"/>
+          </NavLink>
           <HStack spacing={8} alignItems={'center'}>
             <HStack
               as={'nav'}
@@ -59,9 +62,9 @@ function Header() {
                   <NavLink to="/companies">Companies</NavLink>
                   <NavLink to="/companies/create-company">New Company</NavLink>
                   <Button onClick={toggleColorMode}>
-                    {colorMode === 'light' ? <MoonIcon/> : <SunIcon/>}
+                    {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                   </Button>
-                  <button onClick={logOutUser}>Logout</button>
+                  <Button bgColor={'red.500'} color={'white'} onClick={logOutUser}>Logout</Button>
                 </>
               }
               {!isLoggedIn &&

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
-import { Box, Button, ButtonGroup, FormLabel, Heading, Input, Radio, RadioGroup, Stack, useToast } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, FormLabel, Heading, Input, Link, Radio, RadioGroup, Stack, useToast, VStack } from '@chakra-ui/react'
 import { useToastHook } from "../components/Toast";
 import axios from "axios";
 
@@ -8,6 +8,7 @@ function EditCompanyPage(props) {
     const [name, setName] = useState("");
     const [website, setWebsite] = useState("");
     const [address, setAddress] = useState({ street: "", city: "", zip: "", country: "" });
+    const [applications, setApplications] = useState("");
 
     const { companyId } = useParams();
     const navigate = useNavigate();
@@ -95,7 +96,7 @@ function EditCompanyPage(props) {
                     onChange={(e) => setWebsite(e.target.value)}
                 />
 
-<FormLabel mt={3} htmlFor="address">Address:</FormLabel>
+                <FormLabel mt={3} htmlFor="address">Address:</FormLabel>
                 <Input
                     placeholder="Street"
                     type="text"
@@ -128,7 +129,12 @@ function EditCompanyPage(props) {
                 <Button mt={3} type="submit">Update Company</Button>
             </form>
 
-            <Button mt={3} onClick={deleteCompany}>Delete Company</Button>
+            <VStack>
+                <Button mt={3} onClick={deleteCompany}>Delete Company</Button>
+                <Link href={`/companies/edit/${companyId}`}>
+                    <Button mt={3}>Back to Company</Button>
+                </Link>
+            </VStack>
         </Box>
     );
 }

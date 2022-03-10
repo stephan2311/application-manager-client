@@ -133,7 +133,7 @@ function AddApplication() {
                 />
 
 
-                <RadioGroup mt={2} onChange={setChannel} value={channel}>
+                <RadioGroup mt={4} onChange={setChannel} value={channel}>
                     <Stack direction='row'>
                         <label name="channel">Channel:</label>
                         <Radio value='Personal Intro/Recommendation'>Personal Intro/Recommendation</Radio>
@@ -144,7 +144,7 @@ function AddApplication() {
                     </Stack>
                 </RadioGroup>
 
-                <RadioGroup mt={2} onChange={setStatus} value={status}>
+                <RadioGroup mt={4} onChange={setStatus} value={status}>
                     <Stack spacing={5} direction='row'>
                         <label name="status">Status:</label>
                         <Radio colorScheme='blue' value='submitted'>

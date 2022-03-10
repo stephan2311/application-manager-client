@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from "axios";
-import { Box, Center, Heading, List, ListIcon, ListItem, Stack, Text, useColorModeValue } from "@chakra-ui/react";
-import { LinkIcon } from "@chakra-ui/icons";
+import { Box, Badge, Button, Center, Container, Grid, GridItem, Heading, HStack, Image, Link, ListIcon, Stack, Text, useColorModeValue, Spacer, VStack } from "@chakra-ui/react";
+import { InfoIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import Map from "../components/Map";
 
 
@@ -33,55 +33,67 @@ function CompanyDetailsPage(props) {
 
 
     return (
-        <div>
+        <VStack textAlign="center" py={10} px={6}>
+            <Box>
+                <InfoIcon boxSize={'50px'} color={'green.500'} />
+                <Heading as="h2" size="xl" mt={6} mb={2}>
+                    Company Details
+                </Heading>
+            </Box>
 
             {company && (
                 <>
-                    <Heading>Company Details</Heading>
-                    <LinkIcon>{company.website}</LinkIcon>
-                    <Center py={3}>
-                        <Box
-                            w={'full'}
-                            overflow={'hidden'}>
-                            <Stack
-                                textAlign={'center'}
-                                p={6}
-                                align={'center'}>
-                                <Stack direction={'row'} align={'center'} justify={'center'}>
-                                    <Text fontSize={'3xl'} fontWeight={800}>
-                                        {company.name}
-                                    </Text>
-                                </Stack>
-                            </Stack>
+                    <Container centerContent maxW='xl' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                        {company.address &&
+                            <Map street={company.address.street} city={company.address.city} zip={company.address.zip} country={company.address.country} />
+                        }
+                        <Box p='6'>
+                            <Box display='flex' alignItems='baseline'>
+                                <Box
+                                    color='gray.500'
+                                    fontWeight='semibold'
+                                    letterSpacing='wide'
+                                    fontSize='xs'
+                                    textTransform='uppercase'
+                                    ml='2'
+                                >
+                                </Box>
+                            </Box>
+                            <Box
+                                mt='1'
+                                fontWeight='semibold'
+                                as='h4'
+                                lineHeight='tight'
+                                isTruncated
+                            >
+                                {company.name}
+                            </Box>
 
-                            <Box px={6} py={10}>
-                                <List spacing={3}>
-                                    <ListItem>
-                                        <ListIcon as={LinkIcon} color="green.400" />
-                                        {company.website}
-                                    </ListItem>
-                                    <ListItem>
-                                        <Map street={company.address.street} city={company.address.city} zip={company.address.zip} country={company.address.country} />
-                                    </ListItem>
-                                </List>
+                            <Box>
+                                <Link href={company.website} isExternal>
+                                    Company Website <ExternalLinkIcon mx='2px' />
+                                </Link>
+                            </Box>
+
+                            <Box display='flex' mt='2' alignItems='center' ml='2' color='gray.600' fontSize='sm'>
+                                {company.address.city}, {company.address.country}
                             </Box>
                         </Box>
-                    </Center>
-
+                    </Container>
                 </>
             )}
 
-            {/* {application && application.tasks.map((task) => <ApplicationCard key={application._id} {...application} />)} */}
+            <Box>
+                <Link href="/companies">
+                    <Button m={2}>Back to List</Button>
+                </Link>
 
-            <Link to="/companies">
-                <button>Back to List</button>
-            </Link>
+                <Link href={`/companies/edit/${companyId}`}>
+                    <Button m={2}>Edit Company</Button>
+                </Link>
+            </Box>
 
-            <Link to={`/companies/edit/${companyId}`}>
-                <button>Edit Company</button>
-            </Link>
-
-        </div>
+        </VStack>
     );
 }
 
