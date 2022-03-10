@@ -53,7 +53,7 @@ function Header() {
               display={{ base: 'none', md: 'flex' }}>
               {isLoggedIn &&
                 <>
-                  <NavLink to="/account">Account</NavLink>
+                  <NavLink to="/jobs">Jobs</NavLink>
                   <NavLink to="/account/applications">My Applications</NavLink>
                   <NavLink to="/account/applications/create-application">New Application</NavLink>
                   <NavLink to="/companies">Companies</NavLink>

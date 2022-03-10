@@ -8,6 +8,34 @@ function AddCompany(props) {
     const [website, setWebsite] = useState("");
     const [address, setAddress] = useState({ street: "", city: "", zip: "", country: "" });
 
+    // const [query, updateQuery] = useState('');
+    // const [searchResults, setSearchResults] = useState('');
+
+    // function onSearch({ currentTarget }) {
+    //     updateQuery(currentTarget.value);
+    // }
+
+    // let searchOptions = {
+    //     method: 'GET',
+    //     url: 'https://company-search2.p.rapidapi.com/companies/search',
+    //     params: { search_term: query, page: '1' },
+    //     headers: {
+    //         'x-rapidapi-host': 'company-search2.p.rapidapi.com',
+    //         'x-rapidapi-key': '9b63168696mshcae480fa310d4a9p169ab1jsn90c0a9dc9773'
+    //     }
+    // };
+
+    // axios.request(searchOptions)
+    //     .then((response) => {
+    //         const result = response.data;
+    //         setSearchResults(result)
+    //     })
+    //     .catch((error) => console.log(error));
+
+    
+    //     console.log(searchResults.company)
+
+
     const handleAddressInput = (e) => {
         const newAddress = { ...address };
         newAddress[e.target.name] = e.target.value;

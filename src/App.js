@@ -18,6 +18,7 @@ import Account from './pages/HomePage';
 import ApplicationsView from './pages/ApplicationsView';
 import HomePage from './pages/HomePage';
 import EditCompanyPage from './pages/EditCompanyPage';
+import JobListPage from './pages/JobListPage';
 
 
 // function ApplicationView() {
@@ -40,6 +41,7 @@ function App() {
         <Route path="" element={<IsPrivate><ApplicationListPage /></IsPrivate>} />
         <Route path=":applicationId" element={<IsPrivate><ApplicationDetailsPage /></IsPrivate>} />
         <Route path="/" element={<IsAnon><HomePage /></IsAnon>} />
+        <Route path="/jobs" element={<IsPrivate><JobListPage /></IsPrivate>} />
         <Route path="/companies" element={<IsPrivate><CompanyListPage /></IsPrivate>} />
         <Route path="/companies/:companyId" element={<IsPrivate><CompanyDetailsPage /></IsPrivate>} />
         <Route path="/account/applications/edit/:applicationId" element={<IsPrivate><EditApplicationPage /></IsPrivate>} />

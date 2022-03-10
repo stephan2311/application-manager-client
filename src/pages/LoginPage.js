@@ -42,7 +42,7 @@ export default function LoginPage(props) {
                 console.log('JWT token', response.data.authToken);
                 storeToken(response.data.authToken);
                 authenticateUser();
-                navigate('/account');
+                navigate('/account/applications');
             })
             .catch((error) => {
                 const msg = error.response.data.errorMessage;
@@ -104,32 +104,3 @@ export default function LoginPage(props) {
         </Flex >
     );
 }
-
-// function LoginPage(props) {
-
-
-//     return (
-//         <div>
-//             <h1>Login</h1>
-
-//             <form onSubmit={handleLoginSubmit}>
-
-//                 <FormControl isRequired>
-//                     <FormLabel htmlFor='username'>Username</FormLabel>
-//                     <Input id='username' placeholder='Username' value={username} onChange={handleUsername} />
-//                 </FormControl>
-
-//                 <FormControl isRequired>
-//                     <FormLabel htmlFor='password'>Password</FormLabel>
-//                     <Input id='password' placeholder='Password' value={password} onChange={handlePassword} />
-//                 </FormControl>
-
-//                 <Button type="submit">Login</Button>
-//             </form>
-//             {errorMessage && <p>{errorMessage}</p>}
-
-//             <p>Don't have an account yet?</p>
-//             <Link as={ReachLink} to={"/signup"}> Sign Up</Link>
-//         </div>
-//     )
-// }
