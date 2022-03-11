@@ -29,7 +29,6 @@ function ApplicationList() {
         <Box>
             {applications.length == 0 ?
                 <Box textAlign="center" py={10} px={6}>
-                    <p>Box rendered</p>
                     <WarningTwoIcon boxSize={'50px'} color={'orange.300'} />
                     <Heading as="h2" size="xl" mt={6} mb={2}>
                         No Applications
