@@ -14,8 +14,7 @@ import {
   useDisclosure,
   useColorMode,
   useColorModeValue,
-  Switch,
-  Stack,
+  Text,
   Image,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, AddIcon, SunIcon, MoonIcon } from '@chakra-ui/icons';
@@ -46,9 +45,16 @@ function Header() {
             display={{ md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <NavLink to="/">
+          {isLoggedIn &&
+          <NavLink to="/account/applications">
             <Image src="https://img.icons8.com/material-rounded/24/000000/home.png"/>
           </NavLink>
+          }
+          {!isLoggedIn &&
+          <NavLink to="/">
+            <Text fontSize='2xl'>Welcome</Text>
+          </NavLink>
+          }
           <HStack spacing={8} alignItems={'center'}>
             <HStack
               as={'nav'}
@@ -70,7 +76,7 @@ function Header() {
               {!isLoggedIn &&
                 <>
                   <Button onClick={toggleColorMode}>
-                    {colorMode === 'light' ? '🌙' : '🔆'}
+                    {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                   </Button>
                   <NavLink to="/signup">Register</NavLink>
                   <NavLink to="/login">Login</NavLink>

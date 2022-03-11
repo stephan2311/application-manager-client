@@ -94,10 +94,10 @@ export default function SignupPage(props) {
                                     loadingText="Submitting"
                                     type="submit"
                                     size="lg"
-                                    bg={'blue.400'}
+                                    bg={'green.400'}
                                     color={'white'}
                                     _hover={{
-                                        bg: 'blue.500',
+                                        bg: 'green.500',
                                     }}>
                                     Sign up
                                 </Button>
@@ -105,7 +105,7 @@ export default function SignupPage(props) {
                         </form>
                         <Stack pt={6}>
                             <Text align={'center'}>
-                                Already a user? <Link as={ReachLink} to="/login" color={'blue.400'}>Login</Link>
+                                Already a user? <Link as={ReachLink} to="/login" color={'green.400'}>Login</Link>
                             </Text>
                         </Stack>
                     </Stack>

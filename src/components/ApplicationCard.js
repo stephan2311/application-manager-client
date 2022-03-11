@@ -79,7 +79,7 @@ function ApplicationCard({ position, dateApplied, company, status, website, chan
                                                 </ListItem>
                                                 <ListItem>
                                                     <ListIcon as={EmailIcon} color="green.400" />
-                                                    {contact.mail}
+                                                    {contact?.mail}
                                                 </ListItem>
                                                 <ListItem>
                                                     <ListIcon as={LinkIcon} color="green.400" />

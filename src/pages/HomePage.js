@@ -3,10 +3,12 @@ import {
     Flex,
     Heading,
     Image,
+    Link,
     Stack,
     Text,
     useBreakpointValue,
 } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
 
 export default function HomePage() {
     return (
@@ -24,32 +26,30 @@ export default function HomePage() {
                                 position: 'absolute',
                                 bottom: 1,
                                 left: 0,
-                                bg: 'blue.400',
+                                bg: 'green.500',
                                 zIndex: -1,
                             }}>
-                            Application Manager
+                            AppliBuddy
                         </Text>
                         <br />{' '}
-                        <Text color={'blue.400'} as={'span'}>
-                            Your Account
+                        <Text color={'green.500'} as={'span'}>
+                            Your Application Manager
                         </Text>{' '}
                     </Heading>
                     <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-                        The project board is an exclusive resource for contract work. It's
-                        perfect for freelancers, agencies, and moonlighters.
+                        AppliBuddy helps you to keep track of all your job applications and supports you in finding new job opportunities.
                     </Text>
                     <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-                        <Button
-                            href={'/account/create-application'}
-                            rounded={'full'}
-                            bg={'blue.400'}
-                            color={'white'}
-                            _hover={{
-                                bg: 'blue.500',
-                            }}>
-                            Your Applications
-                        </Button>
-                        <Button rounded={'full'}>Create Application</Button>
+                        <Link href={`/signup`}>
+                            <Button
+                                bg={'green.500'}
+                                color={'white'}
+                                _hover={{
+                                    bg: 'green.500',
+                                }}>
+                                Register
+                            </Button>
+                        </Link>
                     </Stack>
                 </Stack>
             </Flex>
@@ -58,8 +58,7 @@ export default function HomePage() {
                     alt={'Login Image'}
                     objectFit={'cover'}
                     src={
-                        'https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-                    }
+                        'https://unsplash.com/photos/npxXWgQ33ZQ/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8N3x8am9iJTIwYXBwbGljYXRpb258ZW58MHx8fHwxNjQ2OTczMzMz&force=true'}
                 />
             </Flex>
         </Stack>

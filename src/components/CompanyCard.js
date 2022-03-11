@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, Heading, List, ListIcon, ListItem, LinkOverlay, LinkBox, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Spacer, Stack, Text, useColorModeValue, useDisclosure, flexbox } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Heading, List, ListIcon, ListItem, LinkOverlay, LinkBox, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Spacer, Stack, Text, useColorModeValue, useDisclosure, flexbox, HStack } from "@chakra-ui/react";
 import { CalendarIcon, ChatIcon, EmailIcon, LinkIcon } from '@chakra-ui/icons';
 import Map from "./Map";
 
@@ -7,15 +7,14 @@ function CompanyCard({ name, website, address, _id }) {
 
     return (
         <div>
-            <Box as='article' maxW='md' p='5' borderWidth='1px' rounded='md'>
+            <HStack as='article' maxW='md' p='5' borderWidth='1px' rounded='md'>
                 <Heading size='md' my='2'>
                     {name}
                 </Heading>
-                <Flex>
+                <Spacer/>
                     <LinkBox as={'button'}>
                         <LinkOverlay href={`/companies/${_id}`}>
                             <Button
-                                mt={10}
                                 w={'full'}
                                 bg={'green.400'}
                                 color={'white'}
@@ -28,9 +27,7 @@ function CompanyCard({ name, website, address, _id }) {
                             </Button>
                         </LinkOverlay>
                     </LinkBox>
-                </Flex>
-
-            </Box>
+            </HStack>
         </div>
     );
 }

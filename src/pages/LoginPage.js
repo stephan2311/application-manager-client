@@ -42,7 +42,7 @@ export default function LoginPage(props) {
                 console.log('JWT token', response.data.authToken);
                 storeToken(response.data.authToken);
                 authenticateUser();
-                navigate('/account/applications');
+                navigate('/jobs');
             })
             .catch((error) => {
                 const msg = error.response.data.errorMessage;
@@ -85,14 +85,14 @@ export default function LoginPage(props) {
                                     {/* <Link color={'blue.400'}>Forgot password?</Link> */}
                                     
                                     <Text>Don't have an account yet?</Text>
-                                    <Link as={ReachLink} color={'blue.400'} to={"/signup"}> Sign Up</Link>
+                                    <Link as={ReachLink} color={'green.400'} to={"/signup"}> Sign Up</Link>
                                 </Stack>
                                 <Button
                                     type='submit'
-                                    bg={'blue.400'}
+                                    bg={'green.400'}
                                     color={'white'}
                                     _hover={{
-                                        bg: 'blue.500',
+                                        bg: 'green.500',
                                     }}>
                                     Login
                                 </Button>

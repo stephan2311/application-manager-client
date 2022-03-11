@@ -65,23 +65,21 @@ function AddApplication() {
             .catch((error) => console.log(error));
 
     };
-
     return (
         <Box m={50}>
             <Heading>Add Application</Heading>
 
             <form onSubmit={handleSubmit}>
 
-
-                <FormLabel mt={2} htmlFor="companies">Select Company:</FormLabel>
-                <Flex>
-                    <Select name="companies" onChange={(e) => setCompany(e.target.value)}>
-                        {companies.map(item => {
-                            return (<option key={item._id} value={item._id}>{item.name}</option>);
-                        })}
-                    </Select>
-                    <Button ml={4} as={Link} to='/companies/create-company'>Add Company</Button>
-                </Flex>
+                    <FormLabel mt={2} htmlFor="companies">Select Company:</FormLabel>
+                    <Flex>
+                        <Select name="companies" onChange={(e) => setCompany(e.target.value)}>
+                            {companies.map(item => {
+                                return (<option key={item._id} value={item._id}>{item.name}</option>);
+                            })}
+                        </Select>
+                        <Button ml={4} as={Link} to='/companies/create-company'>Add Company</Button>
+                    </Flex>
 
 
                 <FormLabel mt={2} htmlFor="position">Position:</FormLabel>

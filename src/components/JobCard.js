@@ -1,7 +1,7 @@
-import { Box, Button, Center, Flex, Heading, List, ListIcon, ListItem, LinkOverlay, LinkBox, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Spacer, Stack, Text, useColorModeValue, useDisclosure, flexbox, Link } from "@chakra-ui/react";
+import { Box, Button, Center, Divider, Flex, Heading, List, ListIcon, ListItem, LinkOverlay, LinkBox, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Spacer, Stack, Text, useColorModeValue, useDisclosure, flexbox, Link } from "@chakra-ui/react";
 import moment from 'moment';
 import axios from "axios";
-import { CalendarIcon, ChatIcon, EmailIcon, ExternalLinkIcon, LinkIcon } from '@chakra-ui/icons';
+import { CalendarIcon, ChatIcon, DragHandleIcon, EmailIcon, ExternalLinkIcon, LinkIcon } from '@chakra-ui/icons';
 
 function JobCard({ url, title, company_name, company_log, category, job_type, publication_date, candidate_required_location, salary, description, _id }) {
 
@@ -71,19 +71,15 @@ function JobCard({ url, title, company_name, company_log, category, job_type, pu
                                         <Box bg={useColorModeValue('gray.50', 'gray.900')} px={6} py={10}>
                                             <List spacing={3}>
                                                 <ListItem>
-                                                    <ListIcon as={CalendarIcon} color="green.400" />
+                                                    <ListIcon as={CalendarIcon} color="green.400" mr={2} />
                                                     {moment(publication_date).format("LL")}
                                                 </ListItem>
                                                 <ListItem>
-                                                    <ListIcon as={EmailIcon} color="green.400" />
-                                                    {salary}
-                                                </ListItem>
-                                                <ListItem>
-                                                    <ListIcon as={LinkIcon} color="green.400" />
+                                                    <ListIcon as={LinkIcon} color="green.400" mr={2} />
                                                     <Link href={url} isExternal>See Job Post<ExternalLinkIcon mx='2px' /></Link>
                                                 </ListItem>
                                                 <ListItem>
-                                                    <ListIcon as={ChatIcon} color="green.400" />
+                                                    <Text as={DragHandleIcon} color="green.400" mr={2} />
                                                     {category}
                                                 </ListItem>
                                             </List>

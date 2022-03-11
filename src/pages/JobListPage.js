@@ -29,22 +29,20 @@ function JobListPage() {
 
     return (
         <div>
-            <Container mt={2}>
-                <Center>
-                    <Box>
-                        <Heading align={'center'} mt={20}>Jobs</Heading>
-                        <Text>
-                            Job Search powered by{' '}
-                            <Link color='teal.500' href='https://remotive.io/'>
-                                Remotive.io
-                            </Link>
-                        </Text>
-                    </Box>
-                </Center>
+            <Container mt={4} >
+                <Box textAlign={"center"}>
+                    <Heading align={'center'} m={4}>Job Posts</Heading>
+                    <Text>
+                        Job Search powered by{' '}
+                        <Link color='teal.500' href='https://remotive.io/'>
+                            Remotive.io
+                        </Link>
+                    </Text>
+                </Box>
                 {fetching && <Spinner></Spinner>}
                 {jobs.map((job) => {
                     return (
-                        <Box m={2}>
+                        <Box mt={2} ml={14} >
                             <JobCard key={job._id} {...job} />
                         </Box>
                     )

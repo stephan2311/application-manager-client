@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import ApplicationCard from "./ApplicationCard";
-import { Box, Button, Center, GridItem, Heading, Model, Text, useDisclosure, VStack } from "@chakra-ui/react";
+import { Box, Button, Center, Container, GridItem, Heading, Model, Text, Spinner, useDisclosure, VStack } from "@chakra-ui/react";
 import { WarningTwoIcon } from "@chakra-ui/icons";
 
 function ApplicationList() {
@@ -15,7 +15,9 @@ function ApplicationList() {
                 `${process.env.REACT_APP_API_URL}/account/applications`,
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
-            .then((response) => setApplications(response.data))
+            .then((response) => {
+                setApplications(response.data);
+            })
             .catch((error) => console.log(error));
     };
 
@@ -25,8 +27,9 @@ function ApplicationList() {
 
     return (
         <Box>
-            {!applications &&
+            {applications.length == 0 ?
                 <Box textAlign="center" py={10} px={6}>
+                    <p>Box rendered</p>
                     <WarningTwoIcon boxSize={'50px'} color={'orange.300'} />
                     <Heading as="h2" size="xl" mt={6} mb={2}>
                         No Applications
@@ -36,20 +39,22 @@ function ApplicationList() {
                     </Text>
                     <NavLink to="/account/applications/create-application"><Button bgColor={'green.500'} color={'white'} m={4}>New Application</Button></NavLink>
                 </Box>
-            }
-            {applications &&
-                <>
-                    {applications.map((application) => {
-                        return (
-                            <Box m={2}>
-                                <ApplicationCard key={application._id} {...application} />
-                            </Box>
-                        )
-                    }
-                    )}
-                </>
-            }
+                :
+                <Container mt={4}>
+                    <Box>
+                        <Heading align={'center'} m={4}>Applications</Heading>
+                        {applications.map((application) => {
+                            return (
+                                <Box mt={2} ml={14}>
+                                    <ApplicationCard key={application._id} {...application} />
+                                </Box>
+                            )
+                        }
+                        )}
+                    </Box>
+                </Container>
 
+            }
         </Box>
     );
 }

@@ -60,7 +60,7 @@ export default function ApplicationDetails(props) {
                             </ListItem>
                             <ListItem>
                                 <ListIcon as={EmailIcon} color="green.400" />
-                                {props.contact.mail}
+                                {props.contact?.mail}
                             </ListItem>
                             <ListItem>
                                 <ListIcon as={LinkIcon} color="green.400" />

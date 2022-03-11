@@ -74,7 +74,6 @@ function CompanyDetailsPage(props) {
                                     Company Website <ExternalLinkIcon mx='2px' />
                                 </Link>
                             </Box>
-
                             <Box display='flex' mt='2' alignItems='center' ml='2' color='gray.600' fontSize='sm'>
                                 {company.address.city}, {company.address.country}
                             </Box>

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Button, ButtonGroup, FormLabel, Heading, Input, Link, Radio, RadioGroup, Stack, useToast, VStack } from '@chakra-ui/react'
-import { useToastHook } from "../components/Toast";
 import axios from "axios";
 
 function EditCompanyPage(props) {

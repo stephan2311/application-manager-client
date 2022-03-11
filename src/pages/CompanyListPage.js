@@ -25,12 +25,11 @@ function CompanyListPage() {
 
     return (
         <div>
-            <Container mt={10}>
-                <Heading align={'center'} m={20}>Companies</Heading>
+            <Container mt={4}>
+                <Heading align={'center'} m={4}>Companies</Heading>
                 {companies.map((company) => {
-                    console.table(company)
                     return (
-                        <Box m={2}>
+                        <Box mt={2} ml={14}>
                             <CompanyCard key={company._id} {...company} />
                         </Box>
                     )
