@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Box, Button, Center, Container, FormControl, Heading, Input, Link, Spinner, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Container, Flex, Image, Heading, HStack, Input, InputGroup, Link, Spacer, Spinner, Text } from "@chakra-ui/react";
 import JobCard from "../components/JobCard";
-import Fuse from 'fuse.js';
+import { List } from "react-virtualized";
+import moment from "moment";
 
 function JobListPage() {
     const [jobs, setJobs] = useState([]);
     const [fetching, setFetching] = useState(true);
-    const [query, updateQuery] = useState('');
+    // const [query, setQuery] = useState("")
+    // const [count, setCount] = useState(0);
 
     const getAllJobs = () => {
         const storedToken = localStorage.getItem("authToken");
@@ -26,50 +28,55 @@ function JobListPage() {
         getAllJobs();
     }, []);
 
-    const options = {
-        keys: [
-            'title',
-            'company_name',
-            'category',
-            'job_type',
-        ]
-    };
+    const renderRow = ({ index, key, style }) => (
+        <Box key={key} style={style} className="job" as='article' maxW='md' p='5' borderWidth='1px' rounded='md' m={3}>
+            <HStack>
+                <Image
+                    boxSize='100px'
+                    src={jobs[index].company_logo} />
+                <Container>
+                    <Box as='time' fontWeight='bold'>
+                        {moment(jobs[index].publication_date).fromNow()}
+                    </Box>
+                    <Heading size='md' my='2'>
+                        {jobs[index].title}
+                    </Heading>
+                    <Box as='a' color='teal.400' fontWeight='bold'>
+                        {jobs[index].company_name}
+                    </Box>
+                </Container>
+            </HStack>
+        </Box>
+    )
 
-    const myIndex = Fuse.createIndex(options.keys, jobs)
 
-    const fuse = new Fuse(jobs, options, myIndex)
-
-    const results = fuse.search(query);
-
-    console.log(results);
-
-    function onSearch({ currentTarget }) {
-        updateQuery(currentTarget.value);
-    }
-
-    console.log(query)
-    
     return (
         <Container mt={4} >
             <Box textAlign={"center"}>
                 <Heading align={'center'} m={4}>Job Posts</Heading>
                 <Text>
                     Job Search powered by{' '}
-                    <Link color='teal.500' href='https://remotive.io/'>
+                    <Link color='teal.500' href='https://remotive.io/' isExternal>
                         Remotive.io
                     </Link>
-                    <Input type="text" value={query} onChange={onSearch} />
                 </Text>
             </Box>
             {fetching && <Spinner></Spinner>}
-            {results.map((job) => {
-                return (
-                    <Box mt={2} ml={14} >
-                        <JobCard key={job._id} {...job} />
-                    </Box>
-                )
-            }
-            )}
+            <Box mt={10}>
+                {jobs.length > 0 ? (
+                    <>
+                        <List
+                            width={2000}
+                            height={700}
+                            rowRenderer={renderRow}
+                            rowCount={jobs.length}
+                            rowHeight={150}
+                        />
+                    </>
+                ) : (
+                    <h1>No Jobs to display</h1>
+                )}
+            </Box>
         </Container>
     );
 }
